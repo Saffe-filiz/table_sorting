@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table</title>
+	<link rel="stylesheet" type="text/css" href="table.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div class="contanier">
+		<div class="content">
+			<div class="table_top">
+			    <span class="select_number">
+			    	<p>Show</p>
+			    	<select v-model="number">
+			    		<option v-for="number in get_search.length">{{number}}</option>
+			    	</select>
+			    	<p>entries</p>
+			    </span>
+			    <span class="search">
+			    	<input type="search" placeholder="Search" v-model="search">
+			    </span>
+			</div>
+			<table cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th v-for="(title, index) in ['First name', 'Last name', 'Email', 'Created at']">
+							<button  
+							@click="sorting_members(title), get_active(index), reverse_members = !reverse_members">
+								<h3 :class="[index == active_link ? 'active': '']">{{title}}</h3>
+							</button>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="member in get_members.slice(0,this.number)">
+						<td><p>{{member.first_name}}</p></td>
+						<td><p>{{member.last_name}}</p></td>
+						<td><p>{{member.email}}</p></td>
+						<td><p>{{member.created_at}}</p></td>
+						<!--<td><button>Go to workplace</button></td>-->
+					</tr>
+				</tbody>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
